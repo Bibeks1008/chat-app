@@ -12,10 +12,18 @@ const useLogin = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post(apiConfig.baseUrl + "/api/auth/login", {
-        username,
-        password,
-      });
+      const res = await axios.post(
+        apiConfig.baseUrl + "/api/auth/login",
+        {
+          username,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       console.log(res);
     } catch (err) {
@@ -32,7 +40,7 @@ export default useLogin;
 
 function handleInputErrors(username: string, password: string) {
   if (!username || !password) {
-    toast.error("Please fill in all fields");
+    toast.error("Please fill all fields");
     return false;
   }
 
