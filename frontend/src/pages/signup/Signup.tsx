@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
 import GenderCheckbox from "./GenderCheckbox";
-import { useState } from "react";
-// import useSignup from "../../hooks/useSignup";
+import React, { useState } from "react";
+import useSignup from "../../hooks/useSignup";
+
+export type SignupInputsType = {
+  fullName: string;
+  username: string;
+  password: string;
+  confirmPassword: string;
+  gender: string;
+};
 
 const SignUp = () => {
-  const [inputs, setInputs] = useState({
+  const [inputs, setInputs] = useState<SignupInputsType>({
     fullName: "",
     username: "",
     password: "",
@@ -12,17 +20,16 @@ const SignUp = () => {
     gender: "",
   });
 
-  const loading = false;
-  // const { loading, signup } = useSignup();
+  const { loading, signup } = useSignup();
 
   const handleCheckboxChange = (gender: string) => {
     setInputs({ ...inputs, gender });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   await signup(inputs);
-  // };
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    await signup(inputs);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
@@ -31,7 +38,7 @@ const SignUp = () => {
           Sign Up <span className="text-blue-500"> ChatApp</span>
         </h1>
 
-        <form onSubmit={() => {}}>
+        <form onSubmit={handleSubmit}>
           <div>
             <label className="label p-2">
               <span className="text-base label-text text-stone-50">

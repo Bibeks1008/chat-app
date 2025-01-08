@@ -1,18 +1,17 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import useLogin from "../../hooks/useLogin";
+import useLogin from "../../hooks/useLogin";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const loading = false;
-  // const { loading, login } = useLogin();
+  const { loading, login } = useLogin();
 
-  // const handleSubmit = async (e) => {
-  // 	e.preventDefault();
-  // 	await login(username, password);
-  // };
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    await login(username, password);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
@@ -22,10 +21,12 @@ const Login = () => {
           <span className="text-blue-500"> ChatApp</span>
         </h1>
 
-        <form onSubmit={() => {}}>
+        <form onSubmit={handleSubmit}>
           <div>
             <label className="label p-2">
-              <span className="text-base label-text text-stone-50">Username</span>
+              <span className="text-base label-text text-stone-50">
+                Username
+              </span>
             </label>
             <input
               type="text"
@@ -38,7 +39,9 @@ const Login = () => {
 
           <div>
             <label className="label">
-              <span className="text-base label-text text-stone-50">Password</span>
+              <span className="text-base label-text text-stone-50">
+                Password
+              </span>
             </label>
             <input
               type="password"
