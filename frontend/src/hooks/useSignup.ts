@@ -3,9 +3,12 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { SignupInputsType } from "../pages/signup/Signup";
 import apiConfig from "../config/apiConfig";
+import { useNavigate } from "react-router-dom";
 
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const signup = async ({
     fullName,
@@ -47,6 +50,7 @@ const useSignup = () => {
       toast.error((err as Error).message);
     } finally {
       setLoading(false);
+      navigate("/login");
     }
   };
 
