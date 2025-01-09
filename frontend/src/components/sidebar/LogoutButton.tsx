@@ -1,9 +1,26 @@
 import { BiLogOut } from "react-icons/bi";
-import useLogout from "../../hooks/useLogout";
+import { useDispatch } from "react-redux";
+
+import { authActions } from "../../store/auth";
+import { useState } from "react";
+import toast from "react-hot-toast";
+// import useLogout from "../../hooks/useLogout";
 
 const LogoutButton = () => {
-  const { loading, logout } = useLogout();
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
+  const logout = () => {
+    setLoading(true);
+    try {
+      localStorage.removeItem("chat-user");
+      dispatch(authActions.setAuthUser(null));
+    } catch (err) {
+      toast.error((err as Error).message);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="mt-auto">
       {!loading ? (

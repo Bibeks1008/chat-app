@@ -13,8 +13,9 @@ const useGetConversations = () => {
 
       try {
         const res = axios.get(apiConfig.baseUrl + "/api/users");
-        const data = res?.data?.data;
-        setConversations(data);
+
+        // setConversations(res?.data?.data);
+        console.log("useCOnversation res ===>", res);
       } catch (err) {
         toast.error((err as Error).message);
       } finally {
