@@ -73,9 +73,8 @@ export class MessageService {
         .findOne({
           participants: { $all: [senderId, chatReceiverId] },
         })
-        .populate('messages');
+        .populate({ path: 'messages', model: 'Message' });
 
-      console.log('form getMessage ////>  ', conversation);
       if (!conversation) return [];
 
       const messages = conversation.messages;
