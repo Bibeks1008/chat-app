@@ -6,7 +6,6 @@ import { RootState } from "../../store";
 import { useDispatch } from "react-redux";
 import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
 import { useSocketContext } from "../../context/SocketContext";
-// import useConversation from "../../zustand/useConversation";
 
 type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
 
@@ -17,14 +16,11 @@ const Conversation = ({
   conversation: any;
   lastIdx: any;
 }) => {
-  const selectedConversation = useSelector(
+  const selectedConversation: any = useSelector(
     (state: RootState) => state.conversation.selectedConversation
   );
 
   const dispatch: AppDispatch = useDispatch();
-  // const { selectedConversation, setSelectedConversation } = useConversation();
-
-  
 
   const isSelected = selectedConversation?._id === conversation._id;
   const { onlineUsers } = useSocketContext();

@@ -1,5 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export type ConversationType = {
+  _id: string;
+  fullName: string;
+  username: string;
+  gender: string;
+  profilePic: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 const initialConversation = { selectedConversation: {}, messages: [] };
 const conversationSlice = createSlice({
   name: "selected-conversation",
