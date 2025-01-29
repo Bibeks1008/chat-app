@@ -90,6 +90,7 @@ export class AuthService {
         message: 'Login Successfull!',
         data: {
           _id: user._id,
+          profilePic: user.profilePic,
           token,
         },
       };
