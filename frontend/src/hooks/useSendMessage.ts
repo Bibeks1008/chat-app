@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { useDispatch } from "react-redux";
 import { conversationActions } from "../store/conversation";
+import apiConfig from "../config/apiConfig";
 
 const useSendMessage = () => {
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,7 @@ const useSendMessage = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        `/api/messages/send/${selectedConversation._id}`,
+        apiConfig.baseUrl + `/api/messages/send/${selectedConversation._id}`,
         { message },
         {
           headers: {

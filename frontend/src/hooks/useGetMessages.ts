@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { useDispatch } from "react-redux";
 import { conversationActions } from "../store/conversation";
+import apiConfig from "../config/apiConfig";
 
 const useGetMessages = () => {
   const [loading, setLoading] = useState(false);
@@ -24,7 +25,7 @@ const useGetMessages = () => {
       setLoading(true);
       try {
         const res = await axios.get(
-          `/api/messages/${selectedConversation._id}`,
+          apiConfig.baseUrl + `/api/messages/${selectedConversation._id}`,
           {
             headers: {
               Authorization: `Bearer ${authUser.token}`,
@@ -32,6 +33,8 @@ const useGetMessages = () => {
           }
         );
         if (!res) throw new Error("Error in fetching message response");
+
+        console.log("in get messages ===> ", res);
 
         dispatch(conversationActions.setMessages(res?.data));
         // setMessages(data);
