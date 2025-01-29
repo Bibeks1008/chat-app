@@ -3,7 +3,7 @@ import { extractTime } from "../../utils/extractTime";
 import { RootState } from "../../store";
 
 const Message = ({ message }: { message: any }) => {
-  const authUser = useSelector((state: RootState) => state.auth.authUser);
+  const authUser: any = useSelector((state: RootState) => state.auth.authUser);
   const selectedConversation: any = useSelector(
     (state: RootState) => state.conversation.selectedConversation
   );
@@ -11,12 +11,13 @@ const Message = ({ message }: { message: any }) => {
   const formattedTime = extractTime(message.createdAt);
   const chatClassName = fromMe ? "chat-end" : "chat-start";
   const profilePic = fromMe
-    ? authUser.profilePic
+    ? authUser?.profilePic
     : selectedConversation?.profilePic;
   const bubbleBgColor = fromMe ? "bg-blue-500" : "";
 
   const shakeClass = message.shouldShake ? "shake" : "";
 
+  console.log("profilePic ===> ", authUser);
   return (
     <div className={`chat ${chatClassName}`}>
       <div className="chat-image avatar">

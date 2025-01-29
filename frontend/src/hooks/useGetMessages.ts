@@ -34,10 +34,8 @@ const useGetMessages = () => {
         );
         if (!res) throw new Error("Error in fetching message response");
 
-        console.log("in get messages ===> ", res);
 
         dispatch(conversationActions.setMessages(res?.data));
-        // setMessages(data);
       } catch (error) {
         toast.error((error as Error).message);
       } finally {

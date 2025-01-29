@@ -17,6 +17,7 @@ const useSendMessage = () => {
   const selectedConversation: any = useSelector(
     (state: RootState) => state.conversation.selectedConversation
   );
+  const authUser = useSelector((state: RootState) => state.auth.authUser);
 
   const sendMessage = async (message: string) => {
     setLoading(true);
@@ -26,13 +27,12 @@ const useSendMessage = () => {
         { message },
         {
           headers: {
+            Authorization: `Bearer ${authUser.token}`,
             "Content-Type": "application/json",
           },
         }
       );
       if (!res) throw new Error("Error in sending message");
-
-      console.log("in send message hook =====>", res);
 
       dispatch(conversationActions.setMessages([...messages, res?.data]));
     } catch (error) {
