@@ -8,6 +8,7 @@ import {
 import { useSelector } from "react-redux";
 import openSocket, { Socket } from "socket.io-client";
 import { RootState } from "../store";
+import apiConfig from "../config/apiConfig";
 
 interface SocketContextType {
   socket: Socket | null;
@@ -43,7 +44,7 @@ const SocketContextProvider: React.FC<SocketContextProviderProps> = ({
 
   useEffect(() => {
     if (authUser) {
-      const socketInstance = openSocket("http://localhost:8080", {
+      const socketInstance = openSocket(apiConfig.baseUrl, {
         query: {
           userId: authUser._id,
         },
