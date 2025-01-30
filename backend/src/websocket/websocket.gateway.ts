@@ -9,7 +9,7 @@ import { Server, Socket } from 'socket.io';
 
 @WebSocketGateway({
   cors: {
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5173', 'https://chat-appbybibs02.netlify.app'],
     methods: ['GET', 'POST'],
   },
 })
@@ -22,9 +22,6 @@ export class WebsocketGateway
   handleConnection(client: Socket) {
     console.log(`Client connected: ${client.id}`);
     const userId = client.handshake.query.userId;
-    // if (userId !== 'undefined') {
-    //   this.userSocketMap[userId] = client.id;
-    // }
 
     if (typeof userId === 'string' && userId.trim() !== '') {
       this.userSocketMap[userId] = client.id; // Safe to use as a key now
@@ -39,9 +36,6 @@ export class WebsocketGateway
     console.log(`Client disconnected: ${client.id}`);
 
     const userId = client.handshake.query.userId;
-    // if (userId !== 'undefined') {
-    //   delete this.userSocketMap[userId];
-    // }
 
     if (typeof userId === 'string' && userId.trim() !== '') {
       delete this.userSocketMap[userId];
