@@ -17,12 +17,19 @@ const useListenMessages = () => {
     (state: RootState) => state.conversation.messages
   );
 
+  const selectedConversation: any = useSelector(
+    (state: RootState) => state.conversation.selectedConversation
+  );
+
   useEffect(() => {
     socket?.on("newMessage", (newMessage) => {
       newMessage.shouldShake = true;
       const sound = new Audio(notificationSound);
       sound.play();
-      dispatch(conversationActions.setMessages([...messages, newMessage]));
+      console.log("newMessage is ===> ", newMessage);
+      if (newMessage?.senderId === selectedConversation._id) {
+        dispatch(conversationActions.setMessages([...messages, newMessage]));
+      }
     });
 
     return () => {
