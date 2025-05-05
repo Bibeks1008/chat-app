@@ -1,9 +1,12 @@
+/** @format */
+
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import apiConfig from "../config/apiConfig";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { data } from "react-router-dom";
 
 const useGetConversations = () => {
   const [loading, setLoading] = useState(false);
@@ -18,8 +21,8 @@ const useGetConversations = () => {
       try {
         const res = await axios.get(apiConfig.baseUrl + "/api/users", {
           headers: {
-            Authorization: `Bearer ${authUser.token}`, 
-            "Content-Type": "application/json", 
+            Authorization: `Bearer ${authUser.token}`,
+            "Content-Type": "application/json",
           },
         });
 

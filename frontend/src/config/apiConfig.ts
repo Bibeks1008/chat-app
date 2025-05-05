@@ -1,9 +1,11 @@
+/** @format */
+
 // const apiConfig = {
 //   baseUrl: "http://localhost:8080",
 // };
 
 const apiConfig = {
-  baseUrl: "https://chat-app-production-bf31.up.railway.app",
+  baseUrl: "https://project-2-production-6e3b.up.railway.app",
 };
 
 export default apiConfig;
