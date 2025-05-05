@@ -6,7 +6,6 @@ import axios from "axios";
 import apiConfig from "../config/apiConfig";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { data } from "react-router-dom";
 
 const useGetConversations = () => {
   const [loading, setLoading] = useState(false);
